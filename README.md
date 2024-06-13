@@ -1,8 +1,3 @@
-# email-operator
-// TODO(user): Add simple overview of use/purpose
-
-## Description
-// TODO(user): An in-depth paragraph about your project and overview of use
 
 ## Getting Started
 
@@ -32,7 +27,7 @@ make install
 **Deploy the Manager to the cluster with the image specified by `IMG`:**
 
 ```sh
-make deploy IMG=<some-registry>/email-operator:tag
+make deploy IMG=bruno74t/email-operator:v12.7
 ```
 
 > **NOTE**: If you encounter RBAC errors, you may need to grant yourself cluster-admin 
