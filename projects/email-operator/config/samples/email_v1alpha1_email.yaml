@@ -1,0 +1,16 @@
+apiVersion: email.batman.example.com/v1alpha1
+kind: Email
+metadata:
+  labels:
+    app.kubernetes.io/name: email
+    app.kubernetes.io/instance: email-sample
+    app.kubernetes.io/part-of: email-operator
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: email-operator
+  name: email-sample
+  namespace: email-operator-system
+spec:
+  senderConfigRef: emailsenderconfig-sample  # Ensure this is correct
+  recipientEmail: "catobrunoisrael@gmail.com"
+  subject: "Test Email"
+  body: "This is the first test email using k8s operator."

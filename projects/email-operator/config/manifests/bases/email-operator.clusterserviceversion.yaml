@@ -1,0 +1,54 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: ClusterServiceVersion
+metadata:
+  annotations:
+    alm-examples: '[]'
+    capabilities: Basic Install
+  name: email-operator.v0.0.0
+  namespace: placeholder
+spec:
+  apiservicedefinitions: {}
+  customresourcedefinitions:
+    owned:
+    - description: Email is the Schema for the emails API
+      displayName: Email
+      kind: Email
+      name: emails.email.batman.example.com
+      version: v1alpha1
+    - description: Define the EmailSenderConfig custom resource
+      displayName: Email Sender Config
+      kind: EmailSenderConfig
+      name: emailsenderconfigs.email.batman.example.com
+      version: v1alpha1
+  description: email-controller and emailsendconfig
+  displayName: email-operator
+  icon:
+  - base64data: ""
+    mediatype: ""
+  install:
+    spec:
+      deployments: null
+    strategy: ""
+  installModes:
+  - supported: false
+    type: OwnNamespace
+  - supported: false
+    type: SingleNamespace
+  - supported: false
+    type: MultiNamespace
+  - supported: true
+    type: AllNamespaces
+  keywords:
+  - go
+  - email-operator
+  - ""
+  links:
+  - name: Email Operator
+    url: https://email-operator.domain
+  maintainers:
+  - email: catobrunoisrael@gmail.com
+    name: Bruno
+  maturity: alpha
+  provider:
+    name: Bruno Gatete
+  version: 0.0.0

@@ -1,0 +1,16 @@
+apiVersion: email.batman.example.com/v1alpha1
+kind: Email
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"email.batman.example.com/v1alpha1","kind":"Email","metadata":{"annotations":{},"name":"test-email","namespace":"default"},"spec":{"body":"This is a test email sent via Mailgun.","recipientEmail":"catobrunoisrael@gmail.com","senderConfigRef":"mailgun-sender-config","subject":"Test Email"}}
+  creationTimestamp: "2024-06-10T11:37:28Z"
+  generation: 1
+  name: test-email
+  namespace: email-operator-system
+  uid: ab502ef8-1252-477e-9adb-74c1cccbb38d
+spec:
+  body: This is a test email sent via Mailgun.
+  recipientEmail: catobrunoisrael@gmail.com
+  senderConfigRef: mailgun-sender-config
+  subject: Test Email

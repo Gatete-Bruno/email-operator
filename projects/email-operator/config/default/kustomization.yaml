@@ -1,0 +1,22 @@
+namespace: email-operator-system
+
+namePrefix: email-operator-
+
+resources:
+- ../crd
+- ../rbac
+- ../manager
+
+images:
+- name: controller
+  newName: bruno74t/email-operator
+  newTag: v12.5
+
+#patches:
+#- path: manager_auth_proxy_patch.yaml
+
+
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+patches:
+- path: manager_auth_proxy_patch.yaml

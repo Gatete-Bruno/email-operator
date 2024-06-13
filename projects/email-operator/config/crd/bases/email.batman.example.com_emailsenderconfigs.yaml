@@ -1,0 +1,65 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.13.0
+  name: emailsenderconfigs.email.batman.example.com
+spec:
+  group: email.batman.example.com
+  names:
+    kind: EmailSenderConfig
+    listKind: EmailSenderConfigList
+    plural: emailsenderconfigs
+    singular: emailsenderconfig
+  scope: Namespaced
+  versions:
+  - name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: Define the EmailSenderConfig custom resource
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: Define the EmailSenderConfigSpec struct with the new field
+              for Mailgun configuration
+            properties:
+              apiTokenSecretRef:
+                type: string
+              mailgunConfig:
+                description: Define the MailgunConfig struct
+                properties:
+                  apiKeySecretRef:
+                    type: string
+                  domain:
+                    type: string
+                type: object
+              senderEmail:
+                type: string
+            required:
+            - apiTokenSecretRef
+            - senderEmail
+            type: object
+          status:
+            description: Define the EmailSenderConfigStatus struct
+            properties:
+              lastUpdateTime:
+                format: date-time
+                type: string
+            type: object
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

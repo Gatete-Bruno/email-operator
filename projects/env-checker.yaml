@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: env-checker
+  namespace: email-operator-system
+spec:
+  containers:
+  - name: env-checker
+    image: alpine
+    command: ["sh", "-c", "env"]
+    env:
+    - name: MAILGUN_DOMAIN
+      value: "sandbox949259d91ad141fa8fb2518c835ccf49.mailgun.org"
+    - name: MAILGUN_API_KEY
+      valueFrom:
+        secretKeyRef:
+          name: mailgun-api-token
+          key: api-token
+  restartPolicy: Never

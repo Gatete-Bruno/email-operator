@@ -1,0 +1,10 @@
+apiVersion: email.batman.example.com/v1alpha1
+kind: Email
+metadata:
+  name: test-email
+  namespace: email-operator-system
+spec:
+  senderConfigRef: mailgun-sender-config
+  recipientEmail: catobrunoisrael@gmail.com
+  subject: "Test Email"
+  body: "This is a test email sent via Mailgun."

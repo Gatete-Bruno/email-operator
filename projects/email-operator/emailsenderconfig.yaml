@@ -1,0 +1,8 @@
+apiVersion: email.batman.example.com/v1alpha1
+kind: EmailSenderConfig
+metadata:
+  name: mailgun-sender-config
+  namespace: email-operator-system
+spec:
+  apiTokenSecretRef: mailgun-api-token
+  senderEmail: notification-service@example.com

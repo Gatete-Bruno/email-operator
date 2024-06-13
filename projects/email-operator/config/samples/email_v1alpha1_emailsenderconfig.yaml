@@ -1,0 +1,18 @@
+apiVersion: email.batman.example.com/v1alpha1
+kind: EmailSenderConfig
+metadata:
+  labels:
+    app.kubernetes.io/name: emailsenderconfig
+    app.kubernetes.io/instance: emailsenderconfig-sample
+    app.kubernetes.io/part-of: email-operator
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: email-operator
+  name: emailsenderconfig-sample  # Corrected name
+  namespace: email-operator-system
+spec:
+  apiTokenSecretRef: mailgun-api-token
+  senderEmail: kato@example.com
+  mailgunConfig:
+    domain: "sandbox949259d91ad141fa8fb2518c835ccf49.mailgun.org"
+    apiKeySecretRef: mailgun-api-token
+
