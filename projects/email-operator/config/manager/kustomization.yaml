@@ -6,4 +6,4 @@ kind: Kustomization
 images:
 - name: controller
   newName: bruno74t/email-operator
-  newTag: v12.7
+  newTag: v13.0

@@ -3,6 +3,7 @@ package controllers
 import (
 	"bytes"
 	"context"
+	"crypto/tls"
 	"encoding/json"
 	"fmt"
 	emailv1alpha1 "github.com/Gatete-Bruno/mailsend-k8s-operator/api/v1alpha1"
@@ -69,7 +70,13 @@ func (r *EmailReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl
 
 // sendEmailWithMailersend sends email using the MailerSend API
 func (r *EmailReconciler) sendEmailWithMailersend(ctx context.Context, email emailv1alpha1.Email, config emailv1alpha1.EmailSenderConfig, apiToken []byte) error {
-	client := &http.Client{}
+	// Create an HTTP client with SSL verification disabled
+	client := &http.Client{
+		Transport: &http.Transport{
+			TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+		},
+	}
+
 	reqBody, err := json.Marshal(map[string]interface{}{
 		"from": map[string]string{
 			"email": config.Spec.SenderEmail,
