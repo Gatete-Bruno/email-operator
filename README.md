@@ -18,7 +18,7 @@ make install
 **Deploy the Manager to the cluster with the image specified by `IMG`:**
 
 ```sh
-make deploy IMG=bruno74t/email-operator:v12.7
+make deploy IMG=bruno74t/email-operator:v13.0
 ```
 
 > **NOTE**: If you encounter RBAC errors, you may need to grant yourself cluster-admin 
