@@ -40,7 +40,7 @@ func (r *EmailReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl
 	// Fetch the EmailSenderConfig referenced by this email
 	log.Info("Fetching EmailSenderConfig", "name", email.Spec.SenderConfigRef)
 	var config emailv1alpha1.EmailSenderConfig
-	if err := r.Get(ctx, types.NamespacedName{Name: email.Spec.SenderConfigRef, Namespace: "email-operator-system"}, &config); err != nil {
+	if err := r.Get(ctx, types.NamespacedName{Name: email.Spec.SenderConfigRef, Namespace: req.Namespace}, &config); err != nil {
 		log.Error(err, "Failed to fetch EmailSenderConfig", "name", email.Spec.SenderConfigRef)
 		return ctrl.Result{}, err
 	}
@@ -48,7 +48,7 @@ func (r *EmailReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl
 
 	// Fetch the API token from the referenced secret
 	var secret v1.Secret
-	if err := r.Get(ctx, types.NamespacedName{Name: config.Spec.ApiTokenSecretRef, Namespace: "email-operator-system"}, &secret); err != nil {
+	if err := r.Get(ctx, types.NamespacedName{Name: config.Spec.ApiTokenSecretRef, Namespace: req.Namespace}, &secret); err != nil {
 		return ctrl.Result{}, err
 	}
 
@@ -70,12 +70,8 @@ func (r *EmailReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl
 
 // sendEmailWithMailersend sends email using the MailerSend API
 func (r *EmailReconciler) sendEmailWithMailersend(ctx context.Context, email emailv1alpha1.Email, config emailv1alpha1.EmailSenderConfig, apiToken []byte) error {
-	// Create an HTTP client with SSL verification disabled
-	client := &http.Client{
-		Transport: &http.Transport{
-			TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
-		},
-	}
+	// Create an HTTP client with SSL verification enabled
+	client := &http.Client{}
 
 	reqBody, err := json.Marshal(map[string]interface{}{
 		"from": map[string]string{
